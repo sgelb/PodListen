@@ -17,7 +17,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -65,15 +64,10 @@ public class PodcastHelper {
     return (long) url.hashCode() - Integer.MIN_VALUE;
   }
 
-
-
-
-  private static final DateFormat formatYYYYMMDD = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-
   @NonNull
   public static String shortDateFormat(long date) {
     if (new Date().getTime() - date > 6 * 24 * 60 * 60 * 1000) {
-      return formatYYYYMMDD.format(date);
+      return DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault()).format(date);
     } else {
       return DateUtils.getRelativeTimeSpanString(date).toString();
     }
