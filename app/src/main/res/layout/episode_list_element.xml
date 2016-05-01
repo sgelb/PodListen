@@ -33,21 +33,10 @@
             android:textSize="15sp"/>
 
         <TextView
-            android:id="@+id/episode_url"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/episode_title"
-            android:layout_marginRight="75sp"
-            android:layout_marginLeft="72dp"
-            android:autoLink="all"
-            android:singleLine="true"
-            android:textSize="11sp"/>
-
-        <TextView
             android:id="@+id/feed_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/episode_url"
+            android:layout_below="@id/episode_title"
             android:layout_marginRight="75sp"
             android:layout_marginLeft="72dp"
             android:singleLine="true"
@@ -124,6 +113,8 @@
             android:layout_marginTop="2dp"
             android:background="@color/background_contrast"/>
 
+
+
         <com.einmalfel.podlisten.support.PatchedTextView
             android:id="@+id/episode_description"
             android:layout_width="match_parent"
@@ -132,5 +123,15 @@
             android:linksClickable="true"
             android:textSize="13sp"
             android:singleLine="true"/>
+
+        <TextView
+            android:id="@+id/episode_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/episode_description"
+            android:autoLink="web"
+            android:linksClickable="true"
+            android:visibility="gone"
+            android:textSize="11sp"/>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

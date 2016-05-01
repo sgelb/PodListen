@@ -44,7 +44,7 @@ public class EpisodeViewHolder extends RecyclerView.ViewHolder {
   private final ProgressBar progressBar;
   private final FrameLayout playAddFrame;
   private final CardView cardView;
-  private final TextView episdoeUrlView;
+  private final TextView episodeUrlView;
   private long id = 0;
   private boolean expanded = false;
   private int downloaded = -1;
@@ -73,7 +73,7 @@ public class EpisodeViewHolder extends RecyclerView.ViewHolder {
     episodeImage = (ImageView) layout.findViewById(R.id.episode_image);
     progressBar = (ProgressBar) layout.findViewById(R.id.play_load_progress);
     cardView = (CardView) layout.findViewById(R.id.card);
-    episdoeUrlView = (TextView) layout.findViewById(R.id.episode_url);
+    episodeUrlView = (TextView) layout.findViewById(R.id.episode_url);
     View relativeLayout = layout.findViewById(R.id.card_layout);
     relativeLayout.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -135,14 +135,6 @@ public class EpisodeViewHolder extends RecyclerView.ViewHolder {
                           String feedTitle, long played, long length, long date, int downloaded,
                           String shortDescr, String errorMessage, PlayerService.State playerState,
                           String url, long downloadId, String aURL, boolean expanded) {
-    if (errorMessage == null) {
-      episdoeUrlView.setText(TextUtils.isEmpty(url) ? aURL : url);
-      episdoeUrlView.setTextColor(ContextCompat.getColor(
-          context, playerState.isStopped() ? R.color.text : R.color.text_bright));
-    } else {
-      episdoeUrlView.setTextColor(ContextCompat.getColor(context, R.color.accent_secondary));
-      episdoeUrlView.setText(errorMessage);
-    }
 
     if (id != this.id || expanded != this.expanded) {
       titleText.setText(title);
@@ -163,6 +155,10 @@ public class EpisodeViewHolder extends RecyclerView.ViewHolder {
       } else {
         feedTitleText.setText(feedTitle);
       }
+
+      episodeUrlView.setText(TextUtils.isEmpty(url) ? aURL : url);
+      episodeUrlView.setTextColor(ContextCompat.getColor(
+              context, playerState.isStopped() ? R.color.text : R.color.text_bright));
     }
 
     if (expanded != this.expanded) {
@@ -171,8 +167,7 @@ public class EpisodeViewHolder extends RecyclerView.ViewHolder {
       descriptionText.setEllipsize(expanded ? null : TextUtils.TruncateAt.END);
       feedTitleText.setSingleLine(!expanded);
       feedTitleText.setEllipsize(expanded ? null : TextUtils.TruncateAt.END);
-      episdoeUrlView.setSingleLine(!expanded);
-      episdoeUrlView.setEllipsize(expanded ? null : TextUtils.TruncateAt.END);
+      episodeUrlView.setVisibility(expanded? View.VISIBLE : View.GONE);
       titleText.setMaxLines(expanded ? Integer.MAX_VALUE : 2);
       titleText.setEllipsize(expanded ? null : TextUtils.TruncateAt.END);
     }
