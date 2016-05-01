@@ -36,6 +36,7 @@ public class EpisodeViewHolder extends RecyclerView.ViewHolder {
   private final TextView descriptionText;
   private final TextView titleText;
   private final TextView feedTitleText;
+  private final TextView errorView;
   private final ImageView buttonImage;
   private final ImageView episodeImage;
   private final View dividerBottom;
@@ -62,6 +63,7 @@ public class EpisodeViewHolder extends RecyclerView.ViewHolder {
     super(layout);
     this.id = 0;
     titleText = (TextView) layout.findViewById(R.id.episode_title);
+    errorView = (TextView) layout.findViewById(R.id.episode_error);
     descriptionText = (TextView) layout.findViewById(R.id.episode_description);
     dividerBottom = layout.findViewById(R.id.description_divider);
     playAddFrame = (FrameLayout) layout.findViewById(R.id.play_add_frame);
@@ -136,6 +138,14 @@ public class EpisodeViewHolder extends RecyclerView.ViewHolder {
                           String shortDescr, String errorMessage, PlayerService.State playerState,
                           String url, long downloadId, String aURL, boolean expanded) {
 
+    if (errorMessage != null) {
+      errorView.setTextColor(ContextCompat.getColor(context, R.color.accent_secondary));
+      errorView.setText(errorMessage);
+      errorView.setVisibility(View.VISIBLE);
+    } else {
+      errorView.setVisibility(View.GONE);
+    }
+
     if (id != this.id || expanded != this.expanded) {
       titleText.setText(title);
       if (description == null || description.isEmpty()) {
@@ -163,6 +173,8 @@ public class EpisodeViewHolder extends RecyclerView.ViewHolder {
 
     if (expanded != this.expanded) {
       cardView.setCardElevation(UnitConverter.getInstance().dpToPx(expanded ? 8 : 2));
+      errorView.setSingleLine(!expanded);
+      errorView.setEllipsize(expanded ? null : TextUtils.TruncateAt.END);
       descriptionText.setSingleLine(!expanded);
       descriptionText.setEllipsize(expanded ? null : TextUtils.TruncateAt.END);
       feedTitleText.setSingleLine(!expanded);

@@ -33,6 +33,17 @@
             android:textSize="15sp"/>
 
         <TextView
+            android:id="@+id/episode_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/episode_title"
+            android:layout_marginRight="75sp"
+            android:layout_marginLeft="72dp"
+            android:singleLine="true"
+            android:visibility="gone"
+            android:textSize="11sp"/>
+
+        <TextView
             android:id="@+id/feed_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
